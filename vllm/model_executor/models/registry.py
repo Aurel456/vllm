@@ -434,6 +434,8 @@ _MULTIMODAL_MODELS = {
         "qwen2_audio",
         "Qwen2AudioForConditionalGeneration",
     ),
+    "VibeVoiceForCausalLM": ("vibevoice", "VibeVoiceForCausalLM"),
+    "VibeVoiceForASRTraining": ("vibevoice", "VibeVoiceForASRTraining"),
     "Qwen2_5OmniModel": (
         "qwen2_5_omni_thinker",
         "Qwen2_5OmniThinkerForConditionalGeneration",
