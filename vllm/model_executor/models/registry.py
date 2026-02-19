@@ -497,6 +497,9 @@ _MULTIMODAL_MODELS = {
         "NemotronParseForConditionalGeneration",
     ),
     "WhisperForConditionalGeneration": ("whisper", "WhisperForConditionalGeneration"),  # noqa: E501
+    "VibeVoice": ("vibevoice", "VibeVoiceForCausalLM"),
+    "VibeVoiceForASRTraining": ("vibevoice", "VibeVoiceForCausalLM"),
+    "VibeVoiceForCausalLM": ("vibevoice", "VibeVoiceForCausalLM"),
 }
 
 _SPECULATIVE_DECODING_MODELS = {
