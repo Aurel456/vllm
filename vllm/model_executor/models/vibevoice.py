@@ -982,6 +982,9 @@ def _run_ffmpeg(cmd: list, *, stdin_bytes: bytes = None):
     with _FFMPEG_SEM:
         return run(cmd, capture_output=True, check=True, input=stdin_bytes)
 
+# NOTE: This function is preserved for reference or direct usage if needed,
+# but VibeVoiceMultiModalProcessor currently uses the standard DataParser
+# followed by explicit AudioNormalizer application.
 def load_audio(file: Union[str, bytes], target_sr: int = 24000) -> np.ndarray:
     """Load audio from file path or bytes using FFmpeg, resample to 24kHz and normalize."""
     if isinstance(file, bytes):
@@ -1107,6 +1110,20 @@ class VibeVoiceMultiModalProcessor(BaseMultiModalProcessor[VibeVoiceProcessingIn
             raw_audio_list = [raw_audio_list]
         elif not isinstance(raw_audio_list, list):
             raw_audio_list = list(raw_audio_list)
+
+        # Apply normalization
+        # VibeVoice requires specific audio normalization (-25 dBFS)
+        normalizer = AudioNormalizer()
+        normalized_audio_list = []
+        for audio in raw_audio_list:
+            if isinstance(audio, np.ndarray):
+                # Ensure float32
+                if audio.dtype != np.float32:
+                    audio = audio.astype(np.float32)
+                normalized_audio_list.append(normalizer(audio))
+            else:
+                normalized_audio_list.append(audio)
+        raw_audio_list = normalized_audio_list
 
         tokenizer = self.info.get_tokenizer()
         prompt_ids = tokenizer.encode(prompt, add_special_tokens=False)
@@ -1337,6 +1354,7 @@ class VibeVoiceForCausalLM(nn.Module, SupportsMultiModal, SupportsPP):
             input_ids=None,
             positions=positions,
             intermediate_tensors=intermediate_tensors,
-            inputs_embeds=inputs_embeds
+            inputs_embeds=inputs_embeds,
+            **kwargs
         )
         return hidden_states
