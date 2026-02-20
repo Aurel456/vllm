@@ -1040,6 +1040,14 @@ _MULTIMODAL_EXAMPLE_MODELS = {
         "fixie-ai/ultravox-v0_5-llama-3_2-1b",
         trust_remote_code=True,
     ),
+    "VibeVoiceForCausalLM": _HfExamplesInfo(
+        "microsoft/VibeVoice-ASR",
+        trust_remote_code=True,
+    ),
+    "VibeVoiceForASRTraining": _HfExamplesInfo(
+        "microsoft/VibeVoice-ASR",
+        trust_remote_code=True,
+    ),
     "TarsierForConditionalGeneration": _HfExamplesInfo("omni-research/Tarsier-7b"),
     "Tarsier2ForConditionalGeneration": _HfExamplesInfo(
         "omni-research/Tarsier2-Recap-7b",

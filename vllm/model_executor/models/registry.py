@@ -489,6 +489,8 @@ _MULTIMODAL_MODELS = {
         "Tarsier2ForConditionalGeneration",
     ),
     "UltravoxModel": ("ultravox", "UltravoxModel"),
+    "VibeVoiceForCausalLM": ("vibevoice", "VibeVoiceForCausalLM"),
+    "VibeVoiceForASRTraining": ("vibevoice", "VibeVoiceForCausalLM"),
     "VoxtralForConditionalGeneration": ("voxtral", "VoxtralForConditionalGeneration"),  # noqa: E501
     "VoxtralRealtimeGeneration": ("voxtral_realtime", "VoxtralRealtimeGeneration"),  # noqa: E501
     # [Encoder-decoder]
